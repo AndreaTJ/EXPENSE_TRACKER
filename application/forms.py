@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, HiddenField, SelectField, DateField, FloatField
-from wtforms.validators import DataRequired, Length, ValidationError, Email
+from wtforms.fields.html5 import EmailField
+from wtforms.validators import DataRequired, Length, ValidationError
 
 
 class AddUser(FlaskForm):
     Name = StringField('First Name', validators=[DataRequired(), Length(min=4, max=15)]) 
-    Email_address = StringField('Email', validators=[Email(), Length(min=5)])
+    Email_address = EmailField('Email') 
     Submit = SubmitField('Add new user')
 
 
