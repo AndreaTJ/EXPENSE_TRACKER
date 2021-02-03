@@ -1,4 +1,39 @@
 {% extends "base.html" %}
 {% block body %}
 <p>Expenses_template</p>
+
+
+{% if expenses%}
+<p>Hello, {{ name_user }}</p>
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Description of the expense</th>
+        <th>Date</th>
+        <th>Amount</th>
+    </tr>
+    {% for expense in expenses %}
+    <tr>
+        <td><a href="/mod_expense?user={{ name_user }}&id={{expense.expense_id}}">{{ expense.type_expense }}</a></td>
+        <td>{{ expense.description_expense }}</td>
+        <td>{{ expense.date_purchase }}</td>
+        <td>{{ expense.amount }}</td>
+
+    </tr>
+    {% endfor %}
+
+    <p> would you like to add a new expense?</p>
+
+    <a href="/add_expense?user={{ name_user }}"> Add expenses</a>
+
+</table>
+
+{% else%}
+<p> {{ name_user }}, would you like to start adding expenses?</p>
+
+<a href="/add_expense?user={{ name_user }}"> Add expenses</a>
+
+{% endif %}
+
+
 {% endblock body %}

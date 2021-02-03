@@ -3,3 +3,4 @@ __pycache__
 application/__pycache__
 application/data.db
 config.py
+.vscode/

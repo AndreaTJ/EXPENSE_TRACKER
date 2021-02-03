@@ -1,4 +1,30 @@
 {% extends "base.html" %}
 {% block body %}
 <p>home_users</p>
+
+
+{% if users%}
+
+<table>
+    <tr>
+        <th>Users</th>
+    </tr>
+    {% for user in users%}
+    <tr>
+        
+        <td><a href="/expenses?user={{ user.name }}">{{ user.name }}</a></td>
+        
+    </tr>
+    
+    {% endfor %}
+    
+</table>
+<a href="/add_user">Add a new user</a>
+{% else%}
+<p> Ready to track your expenses?</p>
+
+<a href="/add_user">Create your account</a>
+
+{% endif %}
+
 {% endblock body %}

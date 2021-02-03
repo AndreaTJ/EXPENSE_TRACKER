@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, HiddenField, SelectField, DateField, FloatField
+from wtforms import StringField, SubmitField, HiddenField, SelectField, DateField, FloatField, HiddenField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, ValidationError
 
@@ -13,9 +13,10 @@ class AddUser(FlaskForm):
 Type_of_expense =["Personal", "House", "Transport", "Pets", "Miscellaneous"]
 
 class AddExpense(FlaskForm):
+    Expense_id = HiddenField("id")
     Type= SelectField('Type of expense', choices=[(typ, typ) for typ in Type_of_expense])
     Description = StringField('Description of the expense.', validators=[DataRequired()])
-    Date_= DateField("Date", format='%Y-%m-%d',validators=[DataRequired()])
+    Date= StringField('Prueba date, cambiar este field.', validators=[DataRequired()])
     Amount = FloatField('Amount', validators=[DataRequired()])
 
     Add = SubmitField('Add new expense')
@@ -25,3 +26,12 @@ class AddExpense(FlaskForm):
             raise ValidationError ("Invalid amount, please introduce a number greater than 0")
 
 
+class ModExpense(FlaskForm):
+    Expense_id = HiddenField("id")
+    Type= SelectField('Type of expense', choices=[(typ, typ) for typ in Type_of_expense])
+    Description = StringField('Description of the expense.', validators=[DataRequired()])
+    Date= StringField('Prueba date, cambiar este field.', validators=[DataRequired()])
+    Amount = FloatField('Amount', validators=[DataRequired()])
+
+    Save_changes = SubmitField('Save Changes')
+    Delete = SubmitField('Delete Expense')

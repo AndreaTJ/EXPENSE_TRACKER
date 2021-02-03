@@ -1,4 +1,19 @@
 {% extends "base.html" %}
 {% block body %}
 <p>Add_user_template</p>
+<p> Enter your name and email to create your account</p>
+
+<div class='form'>
+    <form method='POST' action=''>
+        {{ form.hidden_tag() }}
+        {{ form.Name.label }} {{ form.Name }} 
+        <br>
+        {{ form.Email_address.label }} {{ form.Email_address }} 
+        <br>
+
+        {{ form.Submit }}
+    </form>
+</div>
+
+
 {% endblock body %}
