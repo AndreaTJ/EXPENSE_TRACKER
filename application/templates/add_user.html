@@ -1,19 +1,43 @@
 {% extends "base.html" %}
 {% block body %}
-<p>Add_user_template</p>
+<br>
+<br>
+<a href="/">Home</a>
+<br>
+<br>
 <p> Enter your name and email to create your account</p>
+
+
 
 <div class='form'>
     <form method='POST' action=''>
         {{ form.hidden_tag() }}
+
+        {% if error_db_insert %}
+        
         {{ form.Name.label }} {{ form.Name }} 
         <br>
         {{ form.Email_address.label }} {{ form.Email_address }} 
         <br>
 
+
+        {{ error_db_insert }}
+        <br>
+
+        {% else %}
+
+        {{ form.Name.label }} {{ form.Name }} 
+        <br>
+        {{ form.Email_address.label }} {{ form.Email_address }} 
+        <br>
+        
+        {% endif %}
+        <br>
+        <br>
+        <br>
+
         {{ form.Submit }}
     </form>
 </div>
-
 
 {% endblock body %}

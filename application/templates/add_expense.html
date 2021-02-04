@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block body %}
-<p>Add_expense_template</p>
+<br>
+<br>
+<a href="/">Home</a>
+<br>
+<br>
+
+
 
 <div class='form'>
     <form method='POST' action=''>
@@ -11,11 +17,28 @@
         <br>
         {{ form.Date.label }} {{ form.Date }} 
         <br>
-        {{ form.Amount.label }} {{ form.Amount }} 
-        <br>
 
+        {% if form.Amount.errors %}
+            {{ form.Amount.label }} {{ form.Amount (placeholder = "Ex: 5.32")}} 
+            {% for error in form.Amount.errors %}
+                <p >{{ error }}</p>
+            {% endfor%}
+            
+            {% else %}
+            {{ form.Amount.label }} {{ form.Amount (placeholder = "Ex:5.32")}} 
+        {% endif %}
+        
+        <br>
+        <br>
+        <br>
         {{ form.Add}}
     </form>
 </div>
 
+
+
+
 {% endblock body %}
+
+
+

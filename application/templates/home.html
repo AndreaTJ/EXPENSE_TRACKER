@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block body %}
-<p>home_users</p>
 
+<br>
+<br>
 
 {% if users%}
 
@@ -19,11 +20,14 @@
     {% endfor %}
     
 </table>
-<a href="/add_user">Add a new user</a>
+<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/add_user">Add a new user</a>
 {% else%}
 <p> Ready to track your expenses?</p>
 
-<a href="/add_user">Create your account</a>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/add_user">Create your account</a>
 
 {% endif %}
 

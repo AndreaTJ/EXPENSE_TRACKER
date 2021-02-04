@@ -20,10 +20,21 @@ def adding_new_users():
     if request.method == 'GET':
         return render_template("add_user.html", form=form)
     else:
-        new_user = Users (name = request.values.get ("Name"), email_address = request.values.get ("Email_address") )
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for("home"))
+        try: 
+            new_user = Users (name = request.values.get ("Name"), email_address = request.values.get ("Email_address") )
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for("home"))
+
+        except Exception as e:
+            error= "" 
+            print("INSERT - Error en acceso a base de datos: {}".format(e)) 
+            if "users.email_address" in str(e): 
+                    error = "This email is already in use, please use a different email"
+            elif "users.PRIMARY" in str(e): 
+                    error = "This name is already in use, please use a different name"
+            return render_template('add_user.html', form=form, error_db_insert=error)
+        
 
 @app.route('/expenses')
 def show_expenses():
@@ -44,16 +55,21 @@ def adding_new_expenses():
     if request.method == 'GET':
         return render_template("add_expense.html", form=form)
     else:
+        if form.validate (): 
 
-        new_expense = Expenses (type_expense= request.values.get ("Type"), 
-        description_expense = request.values.get ("Description"), 
-        date_purchase = request.values.get ("Date"), 
-        amount = request.values.get ("Amount"), 
-        user_name = name_user ) 
+            new_expense = Expenses (type_expense= request.values.get ("Type"), 
+            description_expense = request.values.get ("Description"), 
+            date_purchase = request.values.get ("Date"), 
+            amount = request.values.get ("Amount"), 
+            user_name = name_user ) 
 
-        db.session.add(new_expense)
-        db.session.commit()
-        return redirect(url_for("show_expenses", user = name_user))
+            db.session.add(new_expense)
+            db.session.commit()
+            return redirect(url_for("show_expenses", user = name_user))
+
+            
+        else: 
+            return render_template("add_expense.html", form=form)
 
 @app.route('/mod_expense', methods=['GET', 'POST'] )
 def modifying_expenses():   
@@ -76,23 +92,31 @@ def modifying_expenses():
     else:
 
         form = ModExpense (request.form)
-        
-        if request.form.get ("Save_changes"): 
-            query2 = Expenses.query.filter (Expenses.expense_id == expense_id).all()
-            for element in query2: 
-                element.type_expense = form.Type.data
-                element.description_expense = form.Description.data 
-                element.date_purchase = form.Date.data
-                element.amount = form.Amount.data 
-            db.session.commit() 
-        
-            return redirect(url_for("show_expenses", user = name_user))
 
-        else: 
+        if request.form.get ("Delete"): 
+
             query3 = Expenses.query.filter (Expenses.expense_id == expense_id).first() 
             db.session.delete (query3)
             db.session.commit() 
             return redirect(url_for("show_expenses", user = name_user))
+
+        if form.validate(): 
+        
+            if request.form.get ("Save_changes"): 
+                query2 = Expenses.query.filter (Expenses.expense_id == expense_id).all()
+                for element in query2: 
+                    element.type_expense = form.Type.data
+                    element.description_expense = form.Description.data 
+                    element.date_purchase = form.Date.data
+                    element.amount = form.Amount.data 
+                db.session.commit() 
+            
+                return redirect(url_for("show_expenses", user = name_user))
+        else: 
+            return render_template("mod_expense.html", form=form)
+
+       
+
 
 
 
