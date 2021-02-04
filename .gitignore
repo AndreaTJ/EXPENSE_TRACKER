@@ -5,3 +5,6 @@ application/data.db
 config.py
 .vscode/
 .pytest_cache/
+tests/__pycache__
+htmlcov/
+.coverage
