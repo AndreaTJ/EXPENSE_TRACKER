@@ -1,9 +1,24 @@
 {% extends "base.html" %}
 {% block body %}
 
+<style>
 
+    .row {text-align: center;} 
+
+    table, th, td {border: 1px solid black;}  
+
+    .line {background-color:#00FEFE}
+    .line2 {background-color:#ffc7b6}
+
+    
+
+</style>
 {% if expenses%}
-<p>Hello, {{ name_user }}</p>
+<br>
+<br>
+<span class = "line">Hello, {{ name_user }}, these are your expenses:</span>
+<br>
+<br>
 <table>
     <tr>
         <th>Type</th>
@@ -13,7 +28,7 @@
         <th>Action</th>
     </tr>
     {% for expense in expenses %}
-    <tr>
+    <tr class="row">
         <td>{{ expense.type_expense }}</td>
         <td>{{ expense.description_expense }}</td>
         <td>{{ expense.date_purchase }}</td>
@@ -26,13 +41,17 @@
     
 
 </table>
-<p> would you like to add a new expense?</p>
+
+<p> Would you like to add a new expense?</p>
 
     <a href="/add_expense?user={{ name_user }}"> Add expenses</a>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/">Home</a>
 {% else%}
-<p> {{ name_user }}, would you like to start adding expenses?</p>
-
+<br>
+<br>
+<span class = "line2"> {{ name_user }}, would you like to start adding expenses?</span>
+<br>
+<br>
 <a href="/add_expense?user={{ name_user }}"> Add expenses</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/">Home</a>
 

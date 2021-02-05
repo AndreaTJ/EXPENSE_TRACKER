@@ -2,6 +2,7 @@ from application import app, db
 from flask import render_template, request, url_for, redirect
 from application.models import Users, Expenses
 from application.forms import AddUser, AddExpense, ModExpense
+from datetime import date
 
 @app.route('/')
 def home(): 
@@ -28,10 +29,9 @@ def adding_new_users():
 
         except Exception as e:
             error= "" 
-            print("INSERT - Error en acceso a base de datos: {}".format(e)) 
             if "users.email_address" in str(e): 
                     error = "This email is already in use, please use a different email"
-            elif "users.PRIMARY" in str(e): 
+            else: 
                     error = "This name is already in use, please use a different name"
             return render_template('add_user.html', form=form, error_db_insert=error)
         
@@ -100,7 +100,7 @@ def modifying_expenses():
         if request.method == 'GET':
             form = ModExpense (data= {"Type" : type_expense,
                                     "Description": description_expense,
-                                    "Date": date_purchase,
+                                    "Date": date (int(date_purchase[:4]), int(date_purchase[5:7]), int(date_purchase[8:])),
                                     "Amount":amount })
             return render_template("mod_expense.html", form=form)
         else:
