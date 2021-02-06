@@ -4,7 +4,6 @@ from flask import url_for, request
 
 from application import app, db
 from application.models import Users, Expenses
-from application.forms import AddUser, AddExpense, ModExpense
 
 class TestBase (TestCase):
 
@@ -136,7 +135,7 @@ class Test_Post_New_Expenses_Error (TestBase):
                                     Description = "Black Plain T-shirt",
                                     Date = "2021-01-01",
                                     Amount = "sasdasd"))
-        self.assertIn(b'Invalid amount. Please, introduce a number', response.data)
+        self.assertIn(b'Invalid amount. Please, introduce a positive number', response.data)
 
 class Test_Post_New_Expenses_Negative (TestBase): 
 
@@ -183,7 +182,7 @@ class Test_Post_Mod_Expenses_Error (TestBase):
                                         Date = "2021-12-22",
                                         Amount = "sss",
                                         Save_changes = True))
-            self.assertIn(b'Invalid amount. Please, introduce a number', response.data)
+            self.assertIn(b'Invalid amount. Please, introduce a positive number', response.data)
 
 class Test_Post_Mod_Expenses_Negative (TestBase): 
 

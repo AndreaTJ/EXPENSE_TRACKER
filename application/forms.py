@@ -17,7 +17,7 @@ class AddExpense(FlaskForm):
     Type= SelectField('Type of expense', choices=[(typ, typ) for typ in Type_of_expense])
     Description = StringField('Description of the expense.', validators=[DataRequired()])
     Date= DateField('Purchase Date', format='%Y-%m-%d', validators=[DataRequired()])
-    Amount = FloatField('Amount', validators=[DataRequired(message="Invalid amount. Please, introduce a number")])
+    Amount = FloatField('Amount (£)', validators=[DataRequired(message="Invalid amount. Please, introduce a positive number")])
 
     Add = SubmitField('Add new expense')
 
@@ -33,7 +33,7 @@ class ModExpense(FlaskForm):
     Type= SelectField('Type of expense', choices=[(typ, typ) for typ in Type_of_expense])
     Description = StringField('Description of the expense.', validators=[DataRequired()])
     Date= DateField('Purchase Date', format='%Y-%m-%d', validators=[DataRequired()])
-    Amount = FloatField('Amount', validators=[DataRequired(message="Invalid amount. Please, introduce a number")])
+    Amount = FloatField('Amount (£)', validators=[DataRequired(message="Invalid amount. Please, introduce a positive number")])
 
     Save_changes = SubmitField('Save Changes')
     Delete = SubmitField('Delete Expense')

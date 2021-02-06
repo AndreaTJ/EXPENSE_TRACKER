@@ -24,7 +24,7 @@
         <th>Type</th>
         <th>Description of the expense</th>
         <th>Date</th>
-        <th>Amount</th>
+        <th>Amount (£)</th>
         <th>Action</th>
     </tr>
     {% for expense in expenses %}
@@ -36,9 +36,10 @@
         <td><a href="/mod_expense?user={{ name_user }}&id={{expense.expense_id}}">Edit/Delete</a></td>
 
     </tr>
+    
     {% endfor %}
 
-    
+    <p>Total Expended Amount (£): {{ total }}</p>
 
 </table>
 

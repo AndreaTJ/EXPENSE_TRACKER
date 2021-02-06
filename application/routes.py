@@ -49,7 +49,15 @@ def show_expenses():
         if expenses_user==[]: 
             return render_template("expenses.html", name_user = name_user)
         else: 
-            return render_template("expenses.html", expenses=expenses_user, name_user = name_user) 
+            query = Expenses.query.filter (Expenses.user_name== name_user).all()
+                
+            Total_amount = 0
+            for data in query: 
+                data.amount
+                Total_amount +=data.amount
+            total_amount = round(Total_amount,2)
+
+            return render_template("expenses.html", expenses=expenses_user, name_user = name_user, total =total_amount) 
 
 @app.route('/add_expense', methods=['GET', 'POST'] )
 def adding_new_expenses():
@@ -74,6 +82,7 @@ def adding_new_expenses():
 
                 db.session.add(new_expense)
                 db.session.commit()
+                       
                 return redirect(url_for("show_expenses", user = name_user))
 
                 
