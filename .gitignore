@@ -8,3 +8,4 @@ config.py
 tests/__pycache__
 htmlcov/
 .coverage
+.coverage 2
