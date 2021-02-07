@@ -120,6 +120,8 @@ In this case, this application has been 100% tested in its relevant parts.
 
 **Trello Board:** [Trello Board - Expenses Tracker App
 ](https://trello.com/b/k6vhxiJ9/expensestrackerapp)
+
+**Power Point Presentation:** [Power Point Presentation - Expenses Tracker APP](https://docs.google.com/presentation/d/1X2QrywuLPMiYRns1P_OFashKPquyZcPonaS0C_xDbig/edit#slide=id.p)
 ## Future Releases 
 
 After the application deployment has been completed, there are some additions and improvements that I would like to accomplish:
